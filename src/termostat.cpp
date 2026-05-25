@@ -309,7 +309,7 @@ int main(void) {
 
       byte putereDeTrimis = 0;
       if (modActiv == 0) {
-        // Mod simplu: control proportional cu histerezis
+        // Mod simplu - control proportional cu histerezis
         if (incalzirePornita) {
           if (tempReala >= tempSetata) {
             incalzirePornita = false;
@@ -341,12 +341,8 @@ int main(void) {
         // Initializeaza duratele in ms o singura data la prima rulare
         if (timpStartAvansat == 0) {
           timpStartAvansat = acumLocal;
-          durataTotalaInterval_ms = ((unsigned long)intervalOre * 3600
-                                  + (unsigned long)intervalMin * 60
-                                  + intervalSec) * 1000UL;
-          durataTotalaIncalzire_ms = ((unsigned long)duratOre * 3600
-                                    + (unsigned long)duratMin * 60
-                                    + duratSec) * 1000UL;
+          durataTotalaInterval_ms = ((unsigned long)intervalOre * 3600 + (unsigned long)intervalMin * 60 + intervalSec) * 1000UL;
+          durataTotalaIncalzire_ms = ((unsigned long)duratOre * 3600 + (unsigned long)duratMin * 60 + duratSec) * 1000UL;
           avansat_incalzireActiva = false;
           Serial.println("AVANSAT: Timer pornit");
         }
@@ -368,13 +364,11 @@ int main(void) {
             timpStartAvansat = acumLocal;
             Serial.println("AVANSAT: Opresc incalzirea, reincep intervalul");
           }
-          putereDeTrimis = (avansat_incalzireActiva)
-                          ? (byte)map(putereProc, 0, 100, 30, 126)
-                          : 0;
+          putereDeTrimis = (avansat_incalzireActiva) ? (byte)map(putereProc, 0, 100, 30, 126) : 0;
         }
       }
 
-      // Transmite puterea doar la schimbare sau la 10s
+      // Se transmite puterea doar la schimbare sau la 10s
       if (modConfirmat && stareaCurenta == MENIU_PRINCIPAL) {
         
         int diferenta = abs((int)putereDeTrimis - (int)ultimaPutereTrimisa);
