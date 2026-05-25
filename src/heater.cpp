@@ -19,7 +19,7 @@ int main(void) {
   analogWrite(PIN_CENTRALA, 0); 
 
   if (!radio.begin()) {
-    Serial.println("EROARE CRITICA: Modulul NRF24 RX nu raspunde!");
+    Serial.println("Modulul NRF24 nu raspunde!");
     while (1); 
   }
 
@@ -27,7 +27,7 @@ int main(void) {
   radio.setPALevel(RF24_PA_MIN);
   radio.startListening();
   
-  Serial.println("Receptor HEATER (PWM) pornit cu succes.");
+  Serial.println("Heater pornit cu succes.");
   Serial.println("Astept nivel de putere (0-255)");
 
   byte ultimaValoare = 255;

@@ -288,7 +288,7 @@ int main(void) {
   delay(10);
 
   if (!radio.begin()) {
-    Serial.println("EROARE: Modulul NRF24 nu raspunde!");
+    Serial.println("Modulul NRF24 nu raspunde!");
     while (1);
   }
 
@@ -344,7 +344,7 @@ int main(void) {
           durataTotalaInterval_ms = ((unsigned long)intervalOre * 3600 + (unsigned long)intervalMin * 60 + intervalSec) * 1000UL;
           durataTotalaIncalzire_ms = ((unsigned long)duratOre * 3600 + (unsigned long)duratMin * 60 + duratSec) * 1000UL;
           avansat_incalzireActiva = false;
-          Serial.println("AVANSAT: Timer pornit");
+          Serial.println("Timer pornit");
         }
 
         unsigned long timpScurs = acumLocal - timpStartAvansat;
@@ -354,7 +354,7 @@ int main(void) {
           if (timpScurs >= durataTotalaInterval_ms) {
             avansat_incalzireActiva = true;
             timpStartAvansat = acumLocal;
-            Serial.println("AVANSAT: Pornesc incalzirea!");
+            Serial.println("Pornesc incalzirea!");
           }
           putereDeTrimis = 0;
         } else {
@@ -362,7 +362,7 @@ int main(void) {
           if (timpScurs >= durataTotalaIncalzire_ms) {
             avansat_incalzireActiva = false;
             timpStartAvansat = acumLocal;
-            Serial.println("AVANSAT: Opresc incalzirea, reincep intervalul");
+            Serial.println("Opresc incalzirea, reincep intervalul");
           }
           putereDeTrimis = (avansat_incalzireActiva) ? (byte)map(putereProc, 0, 100, 30, 126) : 0;
         }
@@ -375,22 +375,20 @@ int main(void) {
         
         if (diferenta > 10 || (acum - ultimulTimpTransmisie > 10000)) {
           
-          Serial.println("===============================");
-          Serial.println("[DEBUG] 1. Intru in blocul de transmisie");
+          Serial.println("Incep transmisia");
           
           digitalWrite(TFT_CS, HIGH);
           
           radio.flush_tx();
           
-          Serial.println("[DEBUG] 2. Arunc pachetul in aer...");
+          Serial.println("Arunc pachetul");
       
           radio.startWrite(&putereDeTrimis, sizeof(putereDeTrimis), true);
           
-          Serial.println("[DEBUG] 3. Am scapat din transmisie! Merg la ecran.");
+          Serial.println("Am scapat din transmisie!!!!!!!!!!!!!!!!!!!!!!!!");
 
           ultimaPutereTrimisa = putereDeTrimis;
           ultimulTimpTransmisie = acum;
-          Serial.println("===============================");
         }
       }
 
